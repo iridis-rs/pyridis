@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/flarrow-api-python"]
+members = ["crates/flarrow-api-python", "crates/flarrow-message-python"]
 resolver = "3"
 
 [workspace.package]
@@ -26,5 +26,4 @@ pyo3 = { version = "0.24", features = [
 ] }
 tokio = { version = "1", features = ["full"] }
 
-[workspace.dev-dependencies]
-flarrow-runtime = "0.3"
+arrow = { version = "55", features = ["pyarrow"] }

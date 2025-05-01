@@ -1,4 +1,4 @@
 {
-  "venvPath": "crates/flarrow-api-python",
+  "venvPath": "crates/flarrow-message-python",
   "venv": ".venv"
 }

@@ -19,4 +19,3 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 pyo3 = { workspace = true }
-arrow = { workspace = true }

@@ -26,3 +26,5 @@ iridis-api = { workspace = true }
 
 pyo3 = { workspace = true }
 pyo3-async-runtimes = { workspace = true }
+
+arrow = { workspace = true }

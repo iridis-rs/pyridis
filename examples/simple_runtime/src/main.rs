@@ -1,10 +1,17 @@
 use iridis::prelude::{thirdparty::*, *};
 
 use pyridis_file_ext::PythonFileExtPlugin;
+use pyridis_node::PythonNode;
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let mut layout = DataflowLayout::new();
+
+    let (source, output) = layout
+        .node("source", async |builder: &mut NodeIOBuilder| {
+            builder.output("out")
+        })
+        .await;
 
     let (sink, input) = layout
         .node("sink", async |builder: &mut NodeIOBuilder| {
@@ -15,6 +22,8 @@ async fn main() -> Result<()> {
     let layout = layout.build();
 
     let flows = Flows::new(layout.clone(), async move |builder: &mut FlowsBuilder| {
+        builder.connect(input, output, None)?;
+
         Ok(())
     })
     .await?;
@@ -31,6 +40,16 @@ async fn main() -> Result<()> {
     .await?;
 
     runtime
-        .run(flows, async move |_loader: &mut NodeLoader| Ok(()))
+        .run(flows, async move |loader: &mut NodeLoader| {
+            loader
+                .load::<Timer>(source, serde_yml::from_str("frequency: 1.0")?)
+                .await?;
+
+            loader
+                .load::<PythonNode>(sink, serde_yml::from_str("python_file_path: /home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/example.py")?)
+                .await?;
+
+            Ok(())
+        })
         .await
 }

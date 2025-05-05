@@ -1,4 +1,5 @@
-use iridis_api::prelude as ird;
+use arrow::{array::ArrayData, pyarrow::PyArrowType};
+use iridis_api::prelude::{self as ird, Header};
 
 use pyo3::prelude::*;
 
@@ -51,7 +52,35 @@ impl Queryables {
 }
 
 #[pyclass]
+pub struct Message {
+    pub data: PyArrowType<ArrayData>,
+    pub header: Header,
+}
+
+#[pymethods]
+impl Message {
+    #[getter]
+    pub fn data(&self) -> PyResult<PyArrowType<ArrayData>> {
+        let array = self.data.0.clone();
+
+        Ok(PyArrowType(array))
+    }
+}
+
+#[pyclass]
 pub struct Input(pub ird::RawInput);
+
+#[pymethods]
+impl Input {
+    pub async fn recv(&mut self) -> PyResult<Message> {
+        let (header, data) = self.0.recv().await?;
+
+        Ok(Message {
+            data: PyArrowType(data),
+            header,
+        })
+    }
+}
 
 #[pyclass]
 pub struct Output(pub ird::RawOutput);

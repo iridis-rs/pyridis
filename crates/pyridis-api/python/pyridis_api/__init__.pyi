@@ -1,6 +1,13 @@
+import pyarrow as pa
+
 from abc import ABC, abstractmethod
 
 from typing import Dict, Any
+
+class Message:
+    @property
+    def data(self) -> pa.Array:
+        pass
 
 class Node(ABC):
     def __init__(self):
@@ -31,7 +38,8 @@ class Queryables:
         pass
 
 class Input:
-    pass
+    async def recv(self) -> Message:
+        pass
 
 class Output:
     pass

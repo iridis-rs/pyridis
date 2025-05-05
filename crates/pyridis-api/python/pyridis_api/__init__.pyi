@@ -1,0 +1,43 @@
+from abc import ABC, abstractmethod
+
+from typing import Dict, Any
+
+class Node(ABC):
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def initialize(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
+        pass
+
+    @abstractmethod
+    async def start(self):
+        pass
+
+class Inputs:
+    async def with_input(self, input: str) -> Input:
+        pass
+
+class Outputs:
+    async def with_output(self, output: str) -> Output:
+        pass
+
+class Queries:
+    async def with_query(self, query: str) -> Query:
+        pass
+
+class Queryables:
+    async def with_queryable(self, queryable: str) -> Queryable:
+        pass
+
+class Input:
+    pass
+
+class Output:
+    pass
+
+class Query:
+    pass
+
+class Queryable:
+    pass

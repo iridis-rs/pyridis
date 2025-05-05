@@ -1,0 +1,20 @@
+[package]
+name = "simple_runtime"
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+readme.workspace = true
+rust-version.workspace = true
+categories.workspace = true
+documentation.workspace = true
+license.workspace = true
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+iridis = { workspace = true }
+
+pyridis-node = { workspace = true }
+pyridis-file-ext = { workspace = true }

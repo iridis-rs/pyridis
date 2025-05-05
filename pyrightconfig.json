@@ -1,4 +1,4 @@
 {
-  "venvPath": "crates/flarrow-message-python",
+  "venvPath": "crates/pyridis-api",
   "venv": ".venv"
 }

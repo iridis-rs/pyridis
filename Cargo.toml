@@ -1,29 +1,46 @@
 [workspace]
-members = ["crates/flarrow-api-python", "crates/flarrow-message-python"]
+members = [
+    "crates/pyridis-api",
+    "crates/pyridis-file-ext",
+    "crates/pyridis-message",
+    "crates/pyridis-node",
+    "examples/simple_runtime",
+]
 resolver = "3"
 
 [workspace.package]
 authors = ["Enzo Le Van <dev@enzo-le-van.fr>"]
-description = "The flarrow python API and plugins"
+description = "iridis, with python"
 edition = "2024"
-homepage = "https://github.com/flarrow-rs/flarrow-python"
+homepage = "https://github.com/iridis-rs/iridis-python"
 keywords = []
 readme = "README.md"
 rust-version = "1.85"
 categories = []
-documentation = "https://github.com/flarrow-rs/flarrow-python"
+documentation = "https://github.com/iridis-rs/iridis-python"
 license = "Apache-2.0"
-repository = "https://github.com/flarrow-rs/flarrow-python"
-version = "0.3.1"
+repository = "https://github.com/iridis-rs/iridis-python"
+version = "0.3.2"
 
 [workspace.dependencies]
-flarrow-api = "0.3"
+iridis-api = "0.3"
+iridis-file-ext = "0.3"
+iridis = "0.3"
+
 pyo3 = { version = "0.24", features = [
     "default",
-    "experimental-async",
     "eyre",
-    "extension-module",
+    # "extension-module",
+    "experimental-async",
 ] }
-tokio = { version = "1", features = ["full"] }
+pyo3-async-runtimes = { version = "0.24", features = [
+    "attributes",
+    "tokio-runtime",
+] }
 
+tokio = { version = "1", features = ["full"] }
 arrow = { version = "55", features = ["pyarrow"] }
+
+pyridis-node = { version = "0.3.2", path = "crates/pyridis-node" }
+pyridis-api = { version = "0.3.2", path = "crates/pyridis-api" }
+pyridis-file-ext = { version = "0.3.2", path = "crates/pyridis-file-ext" }

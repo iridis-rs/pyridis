@@ -1,7 +1,6 @@
 use iridis::prelude::{thirdparty::*, *};
 
-use pyridis_file_ext::PythonFileExtPlugin;
-use pyridis_node::PythonNode;
+use pyridis_file_ext::prelude::PythonFileExtPlugin;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -46,9 +45,8 @@ async fn main() -> Result<()> {
                 .await?;
 
             loader
-                .load::<PythonNode>(sink, serde_yml::from_str("python_file_path: /home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/example.py")?)
+                .load_url(Url::parse("file:///home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/sink.py")?, sink, serde_yml::from_str("")?)
                 .await?;
-
             Ok(())
         })
         .await

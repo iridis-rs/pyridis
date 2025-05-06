@@ -1465,7 +1465,6 @@ dependencies = [
 name = "pyridis-node"
 version = "0.3.2"
 dependencies = [
- "eyre",
  "iridis-api",
  "pyo3",
  "pyo3-async-runtimes",

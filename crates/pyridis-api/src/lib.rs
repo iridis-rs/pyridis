@@ -1,98 +1,25 @@
-use arrow::{array::ArrayData, pyarrow::PyArrowType};
-use iridis_api::prelude::{self as ird, Header};
+pub(crate) mod io;
 
-use pyo3::prelude::*;
+pub mod prelude {
+    pub use crate::io::*;
 
-#[pyclass]
-pub struct Inputs(pub ird::Inputs);
+    pub(crate) use thirdparty::*;
 
-#[pymethods]
-impl Inputs {
-    pub async fn with_input(&mut self, input: String) -> PyResult<Input> {
-        let input = self.0.raw(input).await?;
+    pub mod thirdparty {
+        pub use arrow;
+        pub use pyo3;
+        pub use pyo3_async_runtimes;
 
-        Ok(Input(input))
+        pub use iridis_api::prelude as ird;
     }
 }
 
-#[pyclass]
-pub struct Outputs(pub ird::Outputs);
+use prelude::*;
 
-#[pymethods]
-impl Outputs {
-    pub async fn with_output(&mut self, output: String) -> PyResult<Output> {
-        let output = self.0.raw(output).await?;
+#[pyo3::pymodule]
+fn pyridis_api(m: &pyo3::Bound<'_, pyo3::types::PyModule>) -> pyo3::PyResult<()> {
+    use pyo3::types::*;
 
-        Ok(Output(output))
-    }
-}
-
-#[pyclass]
-pub struct Queries(pub ird::Queries);
-
-#[pymethods]
-impl Queries {
-    pub async fn with_query(&mut self, query: String) -> PyResult<Query> {
-        let query = self.0.raw(query).await?;
-
-        Ok(Query(query))
-    }
-}
-
-#[pyclass]
-pub struct Queryables(pub ird::Queryables);
-
-#[pymethods]
-impl Queryables {
-    pub async fn with_queryable(&mut self, queryable: String) -> PyResult<Queryable> {
-        let queryable = self.0.raw(queryable).await?;
-
-        Ok(Queryable(queryable))
-    }
-}
-
-#[pyclass]
-pub struct Message {
-    pub data: PyArrowType<ArrayData>,
-    pub header: Header,
-}
-
-#[pymethods]
-impl Message {
-    #[getter]
-    pub fn data(&self) -> PyResult<PyArrowType<ArrayData>> {
-        let array = self.data.0.clone();
-
-        Ok(PyArrowType(array))
-    }
-}
-
-#[pyclass]
-pub struct Input(pub ird::RawInput);
-
-#[pymethods]
-impl Input {
-    pub async fn recv(&mut self) -> PyResult<Message> {
-        let (header, data) = self.0.recv().await?;
-
-        Ok(Message {
-            data: PyArrowType(data),
-            header,
-        })
-    }
-}
-
-#[pyclass]
-pub struct Output(pub ird::RawOutput);
-
-#[pyclass]
-pub struct Query(pub ird::RawQuery);
-
-#[pyclass]
-pub struct Queryable(pub ird::RawQueryable);
-
-#[pymodule]
-fn pyridis_api(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Inputs>()?;
     m.add_class::<Outputs>()?;
     m.add_class::<Queries>()?;

@@ -1,27 +1,33 @@
 from typing import Any, Dict
-from pyridis_api import Node, Input, Inputs, Outputs, Queries, Queryables
+from pyridis_api import Node, Query, Inputs, Outputs, Queries, Queryables
 
+import pyarrow as pa
 import asyncio
 import time
 
-class MySink(Node):
-    input: Input
+class MyClient(Node):
+    ask_128: Query
+    ask_64: Query
 
     def __init__(self):
         pass
 
-    async def new(self, inputs: Inputs, _outputs: Outputs, _queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
-        self.input = await inputs.with_input("in")
-        print("Initiated")
+    async def new(self, _inputs: Inputs, _outputs: Outputs, queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
+        self.ask_128 = await queries.with_query("ask_128")
+        self.ask_64 = await queries.with_query("ask_64")
 
     async def start(self):
-        print("Started!!")
+        answer = await self.ask_128.query(pa.array([100]))
+        print(answer.data[0])
 
-        for _ in range(10):
-            message = await self.input.recv()
-            print("received message:", message.data)
+        answer = await self.ask_128.query(pa.array([200]))
+        print(answer.data[0])
 
-        print("Stopped!!")
+        answer = await self.ask_64.query(pa.array([100]))
+        print(answer.data[0])
+
+        answer = await self.ask_64.query(pa.array([2]))
+        print(answer.data[0])
 
 def pyridis_node():
-    return MySink
+    return MyClient

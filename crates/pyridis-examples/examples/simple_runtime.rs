@@ -1,6 +1,7 @@
-use iridis::prelude::{thirdparty::*, *};
-
-use pyridis_file_ext::prelude::PythonFileExtPlugin;
+use pyridis_examples::prelude::{
+    ird::{thirdparty::*, *},
+    *,
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -41,7 +42,7 @@ async fn main() -> Result<()> {
     runtime
         .run(flows, async move |loader: &mut NodeLoader| {
             loader
-                .load::<Timer>(source, serde_yml::from_str("frequency: 1.0")?)
+                .load_url(Url::parse("file:///home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/source.py")?, source, serde_yml::from_str("")?)
                 .await?;
 
             loader

@@ -4,7 +4,8 @@ members = [
     "crates/pyridis-file-ext",
     "crates/pyridis-message",
     "crates/pyridis-node",
-    "examples/simple_runtime",
+
+    "crates/pyridis-examples",
 ]
 resolver = "3"
 

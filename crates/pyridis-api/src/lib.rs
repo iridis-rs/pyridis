@@ -30,5 +30,8 @@ fn pyridis_api(m: &pyo3::Bound<'_, pyo3::types::PyModule>) -> pyo3::PyResult<()>
     m.add_class::<Query>()?;
     m.add_class::<Queryable>()?;
 
+    m.add_class::<Header>()?;
+    m.add_class::<PyDataflowMessage>()?;
+
     Ok(())
 }

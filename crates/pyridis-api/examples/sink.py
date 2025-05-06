@@ -17,7 +17,7 @@ class MySink(Node):
         while True:
             try:
                 message = await self.input.recv()
-                print(message.data)
+                print(message.data[0])
             except:
                 break
 

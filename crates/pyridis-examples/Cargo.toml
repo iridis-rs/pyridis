@@ -1,5 +1,5 @@
 [package]
-name = "simple_runtime"
+name = "pyridis-examples"
 authors.workspace = true
 description.workspace = true
 edition.workspace = true
@@ -16,5 +16,4 @@ version.workspace = true
 [dependencies]
 iridis = { workspace = true }
 
-pyridis-node = { workspace = true }
 pyridis-file-ext = { workspace = true }

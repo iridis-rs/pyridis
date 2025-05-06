@@ -1,3 +1,5 @@
+use iridis_api::prelude::DataflowMessage;
+
 use crate::prelude::{
     thirdparty::{
         arrow::{array::*, pyarrow::*},
@@ -58,13 +60,13 @@ impl Queryables {
 pub struct Header(pub ird::Header);
 
 #[pyclass]
-pub struct Message {
+pub struct PyDataflowMessage {
     pub data: PyArrowType<ArrayData>,
     pub header: Header,
 }
 
 #[pymethods]
-impl Message {
+impl PyDataflowMessage {
     #[getter]
     pub fn data(&self) -> PyResult<PyArrowType<ArrayData>> {
         let array = self.data.0.clone();
@@ -78,10 +80,10 @@ pub struct Input(pub ird::RawInput);
 
 #[pymethods]
 impl Input {
-    pub async fn recv(&mut self) -> PyResult<Message> {
+    pub async fn recv(&mut self) -> PyResult<PyDataflowMessage> {
         let (header, data) = self.0.recv().await?;
 
-        Ok(Message {
+        Ok(PyDataflowMessage {
             data: PyArrowType(data),
             header: Header(header),
         })
@@ -91,8 +93,56 @@ impl Input {
 #[pyclass]
 pub struct Output(pub ird::RawOutput);
 
+#[pymethods]
+impl Output {
+    pub async fn send(&mut self, data: PyArrowType<ArrayData>) -> PyResult<()> {
+        self.0.send(data.0).await?;
+
+        Ok(())
+    }
+}
+
 #[pyclass]
 pub struct Query(pub ird::RawQuery);
 
+#[pymethods]
+impl Query {
+    pub async fn query(&mut self, data: PyArrowType<ArrayData>) -> PyResult<PyDataflowMessage> {
+        let (header, data) = self.0.query(data.0).await?;
+
+        Ok(PyDataflowMessage {
+            data: PyArrowType(data),
+            header: Header(header),
+        })
+    }
+}
+
 #[pyclass]
 pub struct Queryable(pub ird::RawQueryable);
+
+// TODO: should accept async python callbacks
+#[pymethods]
+impl Queryable {
+    pub async fn on_demand(&mut self, response: PyObject) -> PyResult<()> {
+        self.0
+            .on_demand(async |query: DataflowMessage| {
+                let DataflowMessage { header, data } = query;
+                let message = PyDataflowMessage {
+                    data: PyArrowType(data),
+                    header: Header(header),
+                };
+
+                let array = Python::with_gil(|py| -> PyResult<ArrayData> {
+                    let array = response.call1(py, (message,))?.into_bound(py);
+                    let array = ArrayData::from_pyarrow_bound(&array);
+
+                    array
+                })?;
+
+                Ok(array)
+            })
+            .await?;
+
+        Ok(())
+    }
+}

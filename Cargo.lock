@@ -1447,6 +1447,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "pyridis-examples"
+version = "0.3.2"
+dependencies = [
+ "iridis",
+ "pyridis-file-ext",
+]
+
+[[package]]
 name = "pyridis-file-ext"
 version = "0.3.2"
 dependencies = [
@@ -1658,15 +1666,6 @@ name = "simdutf8"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3a9fe34e3e7a50316060351f37187a3f546bce95496156754b601a5fa71b76e"
-
-[[package]]
-name = "simple_runtime"
-version = "0.3.2"
-dependencies = [
- "iridis",
- "pyridis-file-ext",
- "pyridis-node",
-]
 
 [[package]]
 name = "slab"

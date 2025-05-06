@@ -1,24 +1,26 @@
 from typing import Any, Dict
-from pyridis_api import Node, Input, Inputs, Outputs, Queries, Queryables
+from pyridis_api import Node, Output, Inputs, Outputs, Queries, Queryables
 
+import pyarrow as pa
 import asyncio
 import time
 
-class MySink(Node):
-    input: Input
+class MySource(Node):
+    output: Output
 
     def __init__(self):
         pass
 
-    async def new(self, inputs: Inputs, _outputs: Outputs, _queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
-        self.input = await inputs.with_input("in")
+    async def new(self, _inputs: Inputs, outputs: Outputs, _queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
+        self.output = await outputs.with_output("out")
 
     async def start(self):
         while True:
             try:
-                message = await self.input.recv()
+                await asyncio.sleep(1)
+                await self.output.send(pa.array(["tick"]))
             except:
                 break
 
 def pyridis_node():
-    return MySink
+    return MySource

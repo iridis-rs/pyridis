@@ -2,9 +2,9 @@ import pyarrow as pa
 
 from abc import ABC, abstractmethod
 
-from typing import Dict, Any
+from typing import Callable, Dict, Any
 
-class Message:
+class PyDataflowMessage:
     @property
     def data(self) -> pa.Array:
         pass
@@ -38,14 +38,17 @@ class Queryables:
         pass
 
 class Input:
-    async def recv(self) -> Message:
+    async def recv(self) -> PyDataflowMessage:
         pass
 
 class Output:
-    pass
+    async def send(self, message: PyDataflowMessage):
+        pass
 
 class Query:
-    pass
+    async def query(self, message: PyDataflowMessage) -> PyDataflowMessage:
+        pass
 
 class Queryable:
-    pass
+    async def on_demand(self, func: Callable[[PyDataflowMessage], pa.Array]):
+        pass

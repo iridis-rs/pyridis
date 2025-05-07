@@ -28,11 +28,26 @@ class MyService(Node):
         else:
             return pa.array([f"{message.data[0]} is less than or equal to 64"])
 
+    async def service_128(self):
+        while True:
+            try:
+                await self.compare_to_128.on_query(self.func_compare_to_128)
+            except:
+                break
+
+    async def service_64(self):
+        while True:
+            try:
+                await self.compare_to_64.on_query(self.func_compare_to_64)
+            except:
+                break
+
     async def start(self):
-        await self.compare_to_128.on_query(self.func_compare_to_128)
-        await self.compare_to_128.on_query(self.func_compare_to_128)
-        await self.compare_to_64.on_query(self.func_compare_to_64)
-        await self.compare_to_64.on_query(self.func_compare_to_64)
+        t1 = asyncio.create_task(self.service_128())
+        t2 = asyncio.create_task(self.service_64())
+
+        await t1
+        await t2
 
 def pyridis_node():
     return MyService

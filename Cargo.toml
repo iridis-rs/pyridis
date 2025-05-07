@@ -31,7 +31,6 @@ iridis = "0.3"
 pyo3 = { version = "0.24", features = [
     "default",
     "eyre",
-    "auto-initialize",
     "experimental-async",
     "abi3-py38",
 ] }

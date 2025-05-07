@@ -15,5 +15,3 @@ version.workspace = true
 
 [dependencies]
 iridis = { workspace = true }
-
-pyridis-file-ext = { workspace = true }

@@ -81,7 +81,7 @@ pub struct Input(pub ird::RawInput);
 #[pymethods]
 impl Input {
     pub async fn recv(&mut self) -> PyResult<PyDataflowMessage> {
-        let (header, data) = self.0.recv().await?;
+        let DataflowMessage { header, data } = self.0.recv().await?;
 
         Ok(PyDataflowMessage {
             data: PyArrowType(data),
@@ -108,7 +108,7 @@ pub struct Query(pub ird::RawQuery);
 #[pymethods]
 impl Query {
     pub async fn query(&mut self, data: PyArrowType<ArrayData>) -> PyResult<PyDataflowMessage> {
-        let (header, data) = self.0.query(data.0).await?;
+        let DataflowMessage { header, data } = self.0.query(data.0).await?;
 
         Ok(PyDataflowMessage {
             data: PyArrowType(data),
@@ -123,9 +123,9 @@ pub struct Queryable(pub ird::RawQueryable);
 // TODO: should accept async python callbacks
 #[pymethods]
 impl Queryable {
-    pub async fn on_demand(&mut self, response: PyObject) -> PyResult<()> {
+    pub async fn on_query(&mut self, response: PyObject) -> PyResult<()> {
         self.0
-            .on_demand(async |query: DataflowMessage| {
+            .on_query(async |query: DataflowMessage| {
                 let DataflowMessage { header, data } = query;
                 let message = PyDataflowMessage {
                     data: PyArrowType(data),

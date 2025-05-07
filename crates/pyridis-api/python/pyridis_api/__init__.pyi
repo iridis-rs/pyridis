@@ -50,5 +50,5 @@ class Query:
         pass
 
 class Queryable:
-    async def on_demand(self, func: Callable[[PyDataflowMessage], pa.Array]):
+    async def on_query(self, func: Callable[[PyDataflowMessage], pa.Array]):
         pass

@@ -1,8 +1,9 @@
 from typing import Any, Dict
-from pyridis_api import Node, Input, Inputs, Outputs, Queries, Queryables
 
 import asyncio
 import time
+
+from pyridis_api import Node, Input, Inputs, Outputs, Queries, Queryables
 
 class MySink(Node):
     input: Input

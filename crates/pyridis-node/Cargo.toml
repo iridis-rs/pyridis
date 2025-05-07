@@ -20,9 +20,11 @@ crate-type = ["cdylib", "rlib"]
 cdylib = []
 
 [dependencies]
-iridis-api = { workspace = true }
-pyridis-api = { workspace = true }
 tokio = { workspace = true }
 
 pyo3 = { workspace = true }
 pyo3-async-runtimes = { workspace = true }
+
+iridis-api = { workspace = true }
+
+pyridis-api = { workspace = true }

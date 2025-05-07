@@ -33,6 +33,7 @@ pyo3 = { version = "0.24", features = [
     "eyre",
     "auto-initialize",
     "experimental-async",
+    "abi3-py38",
 ] }
 
 pyo3-async-runtimes = { version = "0.24", features = [

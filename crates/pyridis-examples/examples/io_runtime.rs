@@ -1,7 +1,4 @@
-use pyridis_examples::prelude::{
-    ird::{thirdparty::*, *},
-    *,
-};
+use pyridis_examples::prelude::ird::{thirdparty::*, *};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -31,7 +28,7 @@ async fn main() -> Result<()> {
     let runtime = Runtime::new(
         async |file_ext: &mut FileExtManagerBuilder, _url_scheme: &mut UrlSchemeManagerBuilder| {
             file_ext
-                .load_statically_linked_plugin::<PythonFileExtPlugin>()
+                .load_dynamically_linked_plugin(pyridis_examples::dylib("pyridis_file_ext", None)?)
                 .await?;
 
             Ok(())
@@ -42,11 +39,19 @@ async fn main() -> Result<()> {
     runtime
         .run(flows, async move |loader: &mut NodeLoader| {
             loader
-                .load_url(Url::parse("file:///home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/source.py")?, source, serde_yml::from_str("")?)
+                .load_url(
+                    pyridis_examples::pyfile("source.py")?,
+                    source,
+                    serde_yml::from_str("")?,
+                )
                 .await?;
 
             loader
-                .load_url(Url::parse("file:///home/enzo/Documents/iridis/iridis-python/crates/pyridis-api/examples/sink.py")?, sink, serde_yml::from_str("")?)
+                .load_url(
+                    pyridis_examples::pyfile("sink.py")?,
+                    sink,
+                    serde_yml::from_str("")?,
+                )
                 .await?;
             Ok(())
         })

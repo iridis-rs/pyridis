@@ -290,9 +290,9 @@ checksum = "ace50bade8e6234aa140d9a2f552bbee1db4d353f69b8217bc503490fc1a9f26"
 
 [[package]]
 name = "backtrace"
-version = "0.3.74"
+version = "0.3.75"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d82cb332cdfaed17ae235a638438ac4d4839913cc2af585c3c6746e8f8bee1a"
+checksum = "6806a6321ec58106fea15becdad98371e28d92ccbc7c8f1b3b6dd724fe8f1002"
 dependencies = [
  "addr2line",
  "cfg-if",
@@ -820,9 +820,9 @@ checksum = "f4c7245a08504955605670dbf141fceab975f15ca21570696aebe9d2e71576bd"
 
 [[package]]
 name = "iridis"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d76d8c9a00deea05424c2faa26bd02c18a8d6354ebd3a325183c2167c54eb2b7"
+checksum = "43633863d191e9ea8c037ed6b7d15385e6f230e740d97a5807382f2dc42213cc"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -843,9 +843,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-api"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "754c85e3a7dbe82f7db5b05f10a5d7ad3f650f7535be1056056227aa174d2d4e"
+checksum = "e1c46ed7e539c298a46e8f296f39f378745623a3c08d1bde3d11458391e50dfb"
 dependencies = [
  "arrow-array",
  "arrow-data",
@@ -862,9 +862,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-api-derive"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "adefae4460edb9624b7f808ae71cd7dcf52c29d37f9c31e03edccba60d0069ab"
+checksum = "a6793a2e3bbaf3c823026ec9e324fa3f894620e752531a1bdd3a31e385069fda"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -873,9 +873,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-builtins"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b940264378862b6d4ad39d2a2a8e497b2b01552dc20d209319acad7ee599cca5"
+checksum = "d16ee780ad04824805e02d8b359acc8bdcf4609da47c3cb8ff990886da50c536"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -885,9 +885,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-file-ext"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b8b9d6640499f7c4c108e3a046a3f388bc9c31cda3c04bcd0fd2bdf39eac760"
+checksum = "b82d29a2ec45e149a318b9b5da13037adbfdc36f6afdb6eae62e2eec6d27bc17"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -901,9 +901,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-file-ext-derive"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf0748425c689ed5a0f5bd9d42b7edfaa2094eaca510120cda8502a192739404"
+checksum = "7a5312c895632eacd12d2b91e73a189f29d46df391f15d152559d9dcc275a419"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -912,9 +912,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-flows"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "277acd553b4cc68006070a51c56036e3ff76ce126f8fa4b52c41fad807f2bd4b"
+checksum = "ed2ffcce273d945086b2f4265bb30c8670af6830acea370d2c53a5250906193b"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -927,9 +927,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-layout"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14aab37de29891e367fb8cf147e5b2eac24a0d70f9a042417b8e791503b38f9f"
+checksum = "14aa5d3c4a7855153e93c259df07185d7448b5c1c632179486bd6b222d5c5b68"
 dependencies = [
  "eyre",
  "tracing",
@@ -938,9 +938,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-message"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "065bb792f08c59a89c992b9fff4ead841c396a5b5722c4ee181f44119d8e8911"
+checksum = "4f889625f6d9414854b17cb6dbfdba3bbde0b819e3efc60de86023340f315c66"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -952,9 +952,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-message-derive"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82f6d16d22ad11121ba91a58f51cd689f1070f64d0573e31be0b8fc87ea54c9d"
+checksum = "ff1a6ffd108d901209e49fdcbe2d00af0d089187cda93e2cd45181ecaf788a30"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -963,9 +963,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-runtime-core"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f75eed7b78d724b4a6d7d3b75e4c8a467f3015434b67c2742e90f796706716b4"
+checksum = "3fa70ffb266ba6106801e539537087cf92a1485c4e481a1f390f2aa3d3a6613f"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -974,9 +974,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-url-scheme"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec879f64d8c007d58884eb4925bf2be883de68b1e193c1bae43fdd997f301609"
+checksum = "3012b66c07cb724391e53bbe041481658e47bb2b4523d5d10be9a47b33b9dda4"
 dependencies = [
  "eyre",
  "iridis-api",
@@ -992,9 +992,9 @@ dependencies = [
 
 [[package]]
 name = "iridis-url-scheme-derive"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5aaa9503c680234713663bb8694340aa751222c44278d048eca19ea8933c1da0"
+checksum = "b0401947a8ef6d60250e6f759d6221b124d7dbf7e025d24029740f98184cd3b4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1105,9 +1105,9 @@ dependencies = [
 
 [[package]]
 name = "libm"
-version = "0.2.14"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a25169bd5913a4b437588a7e3d127cd6e90127b60e0ffbd834a38f1599e016b8"
+checksum = "f9fbbcab51052fe104eb5e5d351cf728d30a5be1fe14d9be8a3b097481fb97de"
 
 [[package]]
 name = "libyml"
@@ -1451,7 +1451,6 @@ name = "pyridis-examples"
 version = "0.3.2"
 dependencies = [
  "iridis",
- "pyridis-file-ext",
 ]
 
 [[package]]
@@ -1769,9 +1768,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.44.2"
+version = "1.45.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6b88822cbe49de4185e3a4cbf8321dd487cf5fe0c5c65695fef6346371e9c48"
+checksum = "2513ca694ef9ede0fb23fe71a4ee4107cb102b9dc1930f6d0fd77aae068ae165"
 dependencies = [
  "backtrace",
  "bytes",

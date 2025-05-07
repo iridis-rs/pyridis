@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "pyridis-message"
-requires-python = "==3.12"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -12,8 +12,10 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = ["numpy>=2.2.5", "pyarrow>=20.0.0"]
+
 [project.optional-dependencies]
 tests = ["pytest"]
+
 [tool.maturin]
 python-source = "python"
 features = ["pyo3/extension-module"]

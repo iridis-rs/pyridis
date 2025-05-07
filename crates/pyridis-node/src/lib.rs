@@ -10,6 +10,7 @@ pub mod prelude {
     pub mod thirdparty {
         pub use pyo3;
         pub use pyo3_async_runtimes;
+        pub use tokio;
 
         pub use iridis_api::prelude as ird;
     }

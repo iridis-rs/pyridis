@@ -29,10 +29,10 @@ class MyService(Node):
             return pa.array([f"{message.data[0]} is less than or equal to 64"])
 
     async def start(self):
-        await self.compare_to_128.on_demand(self.func_compare_to_128)
-        await self.compare_to_128.on_demand(self.func_compare_to_128)
-        await self.compare_to_64.on_demand(self.func_compare_to_64)
-        await self.compare_to_64.on_demand(self.func_compare_to_64)
+        await self.compare_to_128.on_query(self.func_compare_to_128)
+        await self.compare_to_128.on_query(self.func_compare_to_128)
+        await self.compare_to_64.on_query(self.func_compare_to_64)
+        await self.compare_to_64.on_query(self.func_compare_to_64)
 
 def pyridis_node():
     return MyService

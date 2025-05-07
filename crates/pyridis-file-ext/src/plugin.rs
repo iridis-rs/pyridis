@@ -41,11 +41,7 @@ impl FileExtPlugin for PythonFileExtPlugin {
                             .await??,
                     ))
                 } else {
-                    Err(eyre::eyre!(
-                        "Unsupported file extension '{:?}'. On this platform it must be '{}'",
-                        ext,
-                        std::env::consts::DLL_EXTENSION
-                    ))
+                    Err(eyre::eyre!("Unsupported file extension '{:?}'.", ext))
                 }
             }
             None => Err(eyre::eyre!("No file extension found for path {:?}", path)),

@@ -1,9 +1,10 @@
 from typing import Any, Dict
-from pyridis_api import Node, Output, Inputs, Outputs, Queries, Queryables
 
 import pyarrow as pa
 import asyncio
 import time
+
+from pyridis_api import Node, Output, Inputs, Outputs, Queries, Queryables
 
 class MySource(Node):
     output: Output

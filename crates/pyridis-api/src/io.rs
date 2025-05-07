@@ -82,7 +82,7 @@ impl Header {
             .to_system_time()
             .elapsed()
             .unwrap_or_default()
-            .as_millis();
+            .as_micros();
 
         elapsed
     }

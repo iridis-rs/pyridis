@@ -48,3 +48,7 @@ arrow = { version = "55", features = ["pyarrow"] }
 
 pyridis-api = { version = "0.3.2", path = "crates/pyridis-api" }
 pyridis-file-ext = { version = "0.3.2", path = "crates/pyridis-file-ext" }
+
+[workspace.metadata.release]
+rate-limit.new-packages = 10
+tag = false

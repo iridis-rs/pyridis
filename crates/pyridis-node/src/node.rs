@@ -61,7 +61,7 @@ impl ird::Node for PythonNode {
                     let instance: PyObject = Python::with_gil(|py| -> PyResult<PyObject> {
                         let class = module.call_method0(py, "pyridis_node")?;
 
-                        Ok(class.call0(py)?.into())
+                        class.call0(py)
                     })?;
 
                     let configuration: PyObject = Python::with_gil(|py| -> PyResult<PyObject> {

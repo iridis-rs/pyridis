@@ -1,4 +1,8 @@
-set quiet
+set quiet := true
+
+fix:
+    cargo fix --workspace --allow-dirty
+    cargo clippy --fix --allow-dirty
 
 clean:
     cargo clean
@@ -17,14 +21,13 @@ install-libraries:
     maturin develop --manifest-path crates/pyridis-api/Cargo.toml --uv
     maturin develop --manifest-path crates/pyridis-message/Cargo.toml --uv
 
-setup-python:   setup-uv \
-                install-libraries
+setup-python: setup-uv install-libraries
 
 build-plugin:
     cargo build -p pyridis-file-ext --features "cdylib"
 
-io_runtime:
+io_runtime: build-plugin
     LD_LIBRARY_PATH=$(just lib) cargo run --example io_runtime
 
-service_runtime:
+service_runtime: build-plugin
     LD_LIBRARY_PATH=$(just lib) cargo run --example service_runtime

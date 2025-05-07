@@ -134,9 +134,9 @@ impl Queryable {
 
                 let array = Python::with_gil(|py| -> PyResult<ArrayData> {
                     let array = response.call1(py, (message,))?.into_bound(py);
-                    let array = ArrayData::from_pyarrow_bound(&array);
+                    
 
-                    array
+                    ArrayData::from_pyarrow_bound(&array)
                 })?;
 
                 Ok(array)

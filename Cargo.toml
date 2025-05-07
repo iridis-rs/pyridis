@@ -43,8 +43,8 @@ pyo3-async-runtimes = { version = "0.24", features = [
 
 pyridis-node = { version = "0.3.2", path = "crates/pyridis-node" }
 
-tokio = { version = "1", features = ["full"] }
-arrow = { version = "55", features = ["pyarrow"] }
+tokio = { version = "1", features = ["fs"] }
+arrow = { version = "55", default-features = false, features = ["pyarrow"] }
 
 pyridis-api = { version = "0.3.2", path = "crates/pyridis-api" }
 pyridis-file-ext = { version = "0.3.2", path = "crates/pyridis-file-ext" }

@@ -13,14 +13,14 @@ resolver = "3"
 authors = ["Enzo Le Van <dev@enzo-le-van.fr>"]
 description = "iridis, with python"
 edition = "2024"
-homepage = "https://github.com/iridis-rs/iridis-python"
+homepage = "https://iridis-rs.github.io/pyridis/"
 keywords = []
 readme = "README.md"
-rust-version = "1.85"
+rust-version = "1.86.0"
 categories = []
-documentation = "https://github.com/iridis-rs/iridis-python"
+documentation = "https://iridis-rs.github.io/pyridis/"
 license = "Apache-2.0"
-repository = "https://github.com/iridis-rs/iridis-python"
+repository = "https://github.com/iridis-rs/pyridis"
 version = "0.3.2"
 
 [workspace.dependencies]

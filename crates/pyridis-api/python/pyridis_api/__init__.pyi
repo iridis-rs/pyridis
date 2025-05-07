@@ -4,9 +4,26 @@ from abc import ABC, abstractmethod
 
 from typing import Callable, Dict, Any
 
+class Header:
+    @property
+    def source_node(self) -> str:
+        pass
+
+    @property
+    def source_io(self) -> str:
+        pass
+
+    @property
+    def elapsed(self) -> int:
+        pass
+
 class PyDataflowMessage:
     @property
     def data(self) -> pa.Array:
+        pass
+
+    @property
+    def header(self) -> Header:
         pass
 
 class Node(ABC):
@@ -14,7 +31,7 @@ class Node(ABC):
         pass
 
     @abstractmethod
-    def initialize(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
+    async def new(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
         pass
 
     @abstractmethod

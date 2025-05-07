@@ -42,7 +42,7 @@ async fn main() -> Result<()> {
                 .load_url(
                     pyridis_examples::pyfile("source.py")?,
                     source,
-                    serde_yml::from_str("")?,
+                    serde_yml::from_str("frequency: 1.0")?,
                 )
                 .await?;
 

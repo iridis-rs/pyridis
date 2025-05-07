@@ -1,5 +1,7 @@
 use std::ffi::CString;
 
+use pyo3::IntoPyObjectExt;
+
 use crate::prelude::{
     thirdparty::{
         ird::thirdparty::*,
@@ -65,8 +67,7 @@ impl ird::Node for PythonNode {
                     })?;
 
                     let configuration: PyObject = Python::with_gil(|py| -> PyResult<PyObject> {
-                        // TODO convert 'configuration' to a Python dictionary
-                        Ok(PyDict::new(py).into())
+                        make_py_object(py, configuration)
                     })?;
 
                     let inputs = Inputs(inputs);
@@ -124,5 +125,46 @@ impl ird::Node for PythonNode {
                 })
             })
         })
+    }
+}
+
+pub fn make_py_object(py: Python, configuration: serde_yml::Value) -> PyResult<PyObject> {
+    match configuration {
+        serde_yml::Value::Null => Ok(py.None()),
+        serde_yml::Value::Bool(b) => b.into_py_any(py),
+        serde_yml::Value::Number(n) => {
+            if n.is_u64() {
+                n.as_u64().unwrap().into_py_any(py)
+            } else if n.is_i64() {
+                n.as_i64().unwrap().into_py_any(py)
+            } else if n.is_f64() {
+                n.as_f64().unwrap().into_py_any(py)
+            } else {
+                Ok(py.None())
+            }
+        }
+        serde_yml::Value::String(s) => s.into_py_any(py),
+        serde_yml::Value::Sequence(s) => {
+            let py_list = PyList::empty(py);
+
+            for v in s {
+                py_list.append(make_py_object(py, v)?)?;
+            }
+
+            py_list.into_py_any(py)
+        }
+        serde_yml::Value::Mapping(m) => {
+            let py_dict = PyDict::new(py);
+
+            for (k, v) in m.map {
+                let kp = make_py_object(py, k)?;
+                let vp = make_py_object(py, v)?;
+
+                py_dict.set_item(kp, vp)?;
+            }
+
+            py_dict.into_py_any(py)
+        }
+        _ => Ok(py.None()),
     }
 }

@@ -12,7 +12,7 @@ class MySource(Node):
     def __init__(self):
         pass
 
-    async def new(self, _inputs: Inputs, outputs: Outputs, _queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
+    async def new(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
         self.output = await outputs.with_output("out")
 
     async def start(self):

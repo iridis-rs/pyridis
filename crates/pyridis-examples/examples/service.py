@@ -12,7 +12,7 @@ class MyService(Node):
     def __init__(self):
         pass
 
-    async def new(self, _inputs: Inputs, _outputs: Outputs, _queries: Queries, queryables: Queryables, _config: Dict[str, Any]):
+    async def new(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
         self.compare_to_128 = await queryables.with_queryable("compare_to_128")
         self.compare_to_64 = await queryables.with_queryable("compare_to_64")
 

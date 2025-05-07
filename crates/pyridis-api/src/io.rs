@@ -59,6 +59,35 @@ impl Queryables {
 #[pyclass]
 pub struct Header(pub ird::Header);
 
+#[pymethods]
+impl Header {
+    #[getter]
+    pub fn source_node(&self) -> String {
+        let (a, _) = self.0.source;
+        a.to_string()
+    }
+
+    #[getter]
+    pub fn source_io(&self) -> String {
+        let (_, b) = self.0.source;
+        b.to_string()
+    }
+
+    #[getter]
+    pub fn elapsed(&self) -> u128 {
+        let elapsed = self
+            .0
+            .timestamp
+            .get_time()
+            .to_system_time()
+            .elapsed()
+            .unwrap_or_default()
+            .as_millis();
+
+        elapsed
+    }
+}
+
 #[pyclass]
 pub struct PyDataflowMessage {
     pub data: PyArrowType<ArrayData>,
@@ -68,10 +97,17 @@ pub struct PyDataflowMessage {
 #[pymethods]
 impl PyDataflowMessage {
     #[getter]
-    pub fn data(&self) -> PyResult<PyArrowType<ArrayData>> {
+    pub fn data(&self) -> PyArrowType<ArrayData> {
         let array = self.data.0.clone();
 
-        Ok(PyArrowType(array))
+        PyArrowType(array)
+    }
+
+    #[getter]
+    pub fn header(&self) -> Header {
+        let header = self.header.0.clone();
+
+        Header(header)
     }
 }
 
@@ -134,7 +170,6 @@ impl Queryable {
 
                 let array = Python::with_gil(|py| -> PyResult<ArrayData> {
                     let array = response.call1(py, (message,))?.into_bound(py);
-                    
 
                     ArrayData::from_pyarrow_bound(&array)
                 })?;

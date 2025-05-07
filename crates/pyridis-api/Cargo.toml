@@ -23,6 +23,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 iridis-api = { workspace = true }
+uhlc = { version = "0.8", features = ["std"] }
 
 pyo3 = { workspace = true }
 pyo3-async-runtimes = { workspace = true }

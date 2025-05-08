@@ -1,4 +1,5 @@
 use iridis_api::prelude::DataflowMessage;
+use pyo3::IntoPyObjectExt;
 
 use crate::prelude::{
     thirdparty::{
@@ -71,6 +72,11 @@ impl Header {
     pub fn source_io(&self) -> String {
         let (_, b) = self.0.source;
         b.to_string()
+    }
+
+    #[getter]
+    pub fn timestamp(&self, py: Python) -> PyResult<PyObject> {
+        self.0.timestamp.get_time().to_system_time().into_py_any(py)
     }
 
     #[getter]

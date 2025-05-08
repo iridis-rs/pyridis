@@ -1,6 +1,7 @@
 import pyarrow as pa
 
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 from typing import Callable, Dict, Any
 
@@ -11,6 +12,10 @@ class Header:
 
     @property
     def source_io(self) -> str:
+        pass
+
+    @property
+    def timestamp(self) -> datetime:
         pass
 
     @property

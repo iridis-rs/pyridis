@@ -11,7 +11,7 @@ class MySink(Node):
     def __init__(self):
         pass
 
-    async def new(self, inputs: Inputs, _outputs: Outputs, _queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
+    async def new(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
         self.input = await inputs.with_input("in")
 
     async def start(self):

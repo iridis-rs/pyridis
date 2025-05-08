@@ -12,7 +12,7 @@ class MyClient(Node):
     def __init__(self):
         pass
 
-    async def new(self, _inputs: Inputs, _outputs: Outputs, queries: Queries, _queryables: Queryables, _config: Dict[str, Any]):
+    async def new(self, inputs: Inputs, outputs: Outputs, queries: Queries, queryables: Queryables, config: Dict[str, Any]):
         self.ask_128 = await queries.with_query("ask_128")
         self.ask_64 = await queries.with_query("ask_64")
 

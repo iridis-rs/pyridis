@@ -31,3 +31,6 @@ io_runtime: build-plugin
 
 service_runtime: build-plugin
     LD_LIBRARY_PATH=$(just lib) cargo run --example service_runtime
+
+enum_inherit:
+    uv run crates/pyridis-examples/examples/enum_inherit.py

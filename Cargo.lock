@@ -1335,7 +1335,7 @@ dependencies = [
 
 [[package]]
 name = "pyridis-api"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "arrow",
  "iridis-api",
@@ -1346,14 +1346,14 @@ dependencies = [
 
 [[package]]
 name = "pyridis-examples"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "iridis",
 ]
 
 [[package]]
 name = "pyridis-file-ext"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "iridis-file-ext",
  "pyridis-node",
@@ -1361,14 +1361,14 @@ dependencies = [
 
 [[package]]
 name = "pyridis-message"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "pyo3",
 ]
 
 [[package]]
 name = "pyridis-node"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "iridis-api",
  "pyo3",

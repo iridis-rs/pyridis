@@ -21,7 +21,7 @@ categories = []
 documentation = "https://iridis-rs.github.io/pyridis/"
 license = "Apache-2.0"
 repository = "https://github.com/iridis-rs/pyridis"
-version = "0.3.4"
+version = "0.3.5"
 
 [workspace.dependencies]
 iridis-api = "0.3"
@@ -40,13 +40,13 @@ pyo3-async-runtimes = { version = "0.24", features = [
     "tokio-runtime",
 ] }
 
-pyridis-node = { version = "0.3.4", path = "crates/pyridis-node" }
+pyridis-node = { version = "0.3.5", path = "crates/pyridis-node" }
 
 tokio = { version = "1", features = ["fs"] }
 arrow = { version = "55", default-features = false, features = ["pyarrow"] }
 
-pyridis-api = { version = "0.3.4", path = "crates/pyridis-api" }
-pyridis-file-ext = { version = "0.3.4", path = "crates/pyridis-file-ext" }
+pyridis-api = { version = "0.3.5", path = "crates/pyridis-api" }
+pyridis-file-ext = { version = "0.3.5", path = "crates/pyridis-file-ext" }
 
 [workspace.metadata.release]
 rate-limit.new-packages = 10
